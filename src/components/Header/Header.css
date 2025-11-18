@@ -1,0 +1,11 @@
+header img {
+  width: 200px;
+  height: 50px;
+  object-fit: cover;
+}
+
+header {
+  background-color: white;
+  padding: 20px 0;
+  border-bottom: 1px solid #6a6e6e;
+}

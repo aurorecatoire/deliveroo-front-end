@@ -16,9 +16,9 @@ body {
 }
 
 /* ----------------------------
-   HEADER (fond blanc)
+   HEADER 
 ----------------------------- */
-/* HEADER */
+
 header {
   background-color: white;
   padding: 20px 0;
@@ -136,6 +136,7 @@ main {
   padding: 15px;
   cursor: pointer;
 }
+
 
 .dish:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
