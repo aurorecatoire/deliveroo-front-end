@@ -7,6 +7,7 @@ function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [market, setMarket] = useState([]);
+  const [totalprice, setTotalprice] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,14 +25,25 @@ function App() {
     fetchData();
   }, []);
 
-  const AdddDish = (meal) => {
-    setMarket([...market, { name: meal.title, quantité: 1, prix: meal.price }]);
-  };
+  const UploadDish = (meal) => {
+    market.map((dish) => setTotalprice(totalprice + dish.prix));
+    const index = market.findIndex((dish) => dish.name === meal.title);
 
-  const uploadDish = (meal) => {
-    const copy = [...market];
-    copy[market.findIndex((dish) => dish.name === meal.title)].quantité = 2;
-    setMarket(copy);
+    if (index === -1) {
+      setMarket([
+        ...market,
+        { name: meal.title, quantité: 1, prix: Number(meal.price) },
+      ]);
+    } else {
+      const copy = [...market];
+      const copydish = { ...copy[index] };
+      copydish.quantité++;
+      copydish.prix =
+        copydish.quantité * (copydish.prix / (copydish.quantité - 1));
+
+      copy[index] = copydish;
+      setMarket(copy);
+    }
   };
 
   return isLoading ? (
@@ -55,9 +67,6 @@ function App() {
                 des fruits et des légumes frais et de saison issus de
                 l’agriculture biologique.
               </p>
-              {market.map((dish) => {
-                <div>{dish.name}</div>;
-              })}
             </div>
             <img
               className="pictureRestaurant"
@@ -81,12 +90,11 @@ function App() {
                             className="dish"
                             key={meal.id}
                             onClick={() => {
-                              market.findIndex(
-                                (dish) => dish.name === meal.title
-                              ) !== -1
-                                ? uploadDish(meal)
-                                : AdddDish(meal);
-                            }} 
+                              market.map((dish) =>
+                                setTotalprice(totalprice + dish.prix)
+                              );
+                              UploadDish(meal);
+                            }}
                           >
                             {console.log({ market })}
 
@@ -113,7 +121,17 @@ function App() {
           </section>
 
           <div className="market">
-            <p>panier</p>
+            {market.map((dish, index) => {
+              //chaque plat avec sa quantité et son prix
+              return (
+                <div key={index}>
+                  {dish.quantité}
+                  {dish.name} {dish.prix}
+                </div>
+              );
+            })}
+
+            <p>{totalprice}</p>
           </div>
         </div>
       </main>

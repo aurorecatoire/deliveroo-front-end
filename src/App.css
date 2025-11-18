@@ -178,4 +178,6 @@ main {
   width: 350px;
   height: 180px;
   background-color: white;
+  overflow: none;
+  
 }
