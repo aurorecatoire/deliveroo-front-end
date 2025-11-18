@@ -1,0 +1,180 @@
+/* ----------------------------
+   GLOBAL
+----------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #e9ebeb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* ----------------------------
+   HEADER (fond blanc)
+----------------------------- */
+/* HEADER */
+header {
+  background-color: white;
+  padding: 20px 0;
+  border-bottom: 1px solid #6a6e6e;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.containerofrestaurant {
+  background-color: white;
+}
+header img {
+  width: 200px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.Restaurant {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 30px;
+  border-radius: 0;
+}
+
+.restaurantDescription {
+  flex: 1;
+}
+
+.pictureRestaurant {
+  width: 350px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-left: 20px;
+}
+
+/* ----------------------------
+   TITLES / TEXTS
+----------------------------- */
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 19px;
+  color: rgb(134, 138, 138);
+  line-height: 1.5;
+}
+
+/* ----------------------------
+   MAIN 
+----------------------------- */
+main {
+  width: 100%;
+  background-color: #e9ebeb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.foodandmarket {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* ----------------------------
+   MENU
+----------------------------- */
+.menu-rolley {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.category {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+.dishesof1Cat {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 20px;
+}
+
+.dish {
+  display: flex;
+  width: 48%;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.dish:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dish div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.dish h4 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+}
+
+.dish-description {
+  font-size: 14px;
+  height: 40px;
+  overflow: hidden;
+  color: #6a6e6e;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.dish img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.market {
+  width: 350px;
+  height: 180px;
+  background-color: white;
+}
