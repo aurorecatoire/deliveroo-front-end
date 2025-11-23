@@ -1,0 +1,34 @@
+
+.Restaurant {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 30px;
+  border-radius: 0;
+}
+
+.restaurantDescription {
+  flex: 1;
+}
+
+.pictureRestaurant {
+  width: 350px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-left: 20px;
+}
+
+.Restaurant h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.Restaurant p {
+  font-size: 19px;
+  color: rgb(134, 138, 138);
+  line-height: 1.5;
+}

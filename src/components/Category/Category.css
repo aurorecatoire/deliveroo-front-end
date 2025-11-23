@@ -1,0 +1,18 @@
+.category {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+.dishesof1Cat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

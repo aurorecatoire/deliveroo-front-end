@@ -2,18 +2,21 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import logoDeliveroo from "./img/logo.png";
+import Restaurant from "./components/Restaurant/Restaurant";
+import Category from "./components/Category/Category";
+import Market from "./components/Market/Market";
+import Header from "./components/Header/Header";
 
 function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [market, setMarket] = useState([]);
-  const [totalprice, setTotalprice] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://site--backend-deliveroo--m2845slnhyvg.code.run/"
+          "https://site--deliveroo-aurore--pkglxxvkdlsq.code.run/"
         );
         setData(response.data);
         setIsLoading(false);
@@ -26,7 +29,6 @@ function App() {
   }, []);
 
   const UploadDish = (meal) => {
-    market.map((dish) => setTotalprice(totalprice + dish.prix));
     const index = market.findIndex((dish) => dish.name === meal.title);
 
     if (index === -1) {
@@ -38,13 +40,39 @@ function App() {
       const copy = [...market];
       const copydish = { ...copy[index] };
       copydish.quantité++;
-      copydish.prix =
-        copydish.quantité * (copydish.prix / (copydish.quantité - 1));
 
       copy[index] = copydish;
       setMarket(copy);
     }
   };
+  const subTotal = market.reduce((acc, dish) => {
+    return acc + dish.quantité * dish.prix;
+  }, 0);
+
+  const eraseOrAdd = (dishToUpdate, sign) => {
+    const index = market.findIndex((dish) => dish.name === dishToUpdate.name);
+    if (index === -1) {
+      return;
+    }
+    let updatedMarket = [...market];
+
+    if (sign === "-") {
+      if (updatedMarket[index].quantité > 1) {
+        updatedMarket[index] = { ...updatedMarket[index] };
+        updatedMarket[index].quantité--;
+        setMarket(updatedMarket);
+      } else if (updatedMarket[index].quantité === 1) {
+        updatedMarket = updatedMarket.filter((_, i) => i !== index);
+        setMarket(updatedMarket);
+      }
+    } else {
+      updatedMarket[index] = { ...updatedMarket[index] };
+      updatedMarket[index].quantité++;
+      setMarket(updatedMarket);
+    }
+  };
+  const deliveryFees = 2.5;
+  const finalTotal = subTotal + deliveryFees;
 
   return isLoading ? (
     <span>En cours de chargement...</span>
@@ -58,22 +86,7 @@ function App() {
 
       <main>
         <div className="containerofrestaurant">
-          <section className="Restaurant">
-            <div className="restaurantDescription">
-              <h1>{data.restaurant.name}</h1>
-              <p>
-                Profitez de chaque plaisir de la vie quotidienne. Le Pain
-                Quotidien propose des ingrédients simples et sains, du bon pain,
-                des fruits et des légumes frais et de saison issus de
-                l’agriculture biologique.
-              </p>
-            </div>
-            <img
-              className="pictureRestaurant"
-              src={data.restaurant.picture}
-              alt=""
-            />
-          </section>
+          <Restaurant restaurant={data.restaurant} />
         </div>
         <div className="foodandmarket">
           <section className="menu-rolley">
@@ -81,58 +94,16 @@ function App() {
               {data.categories.map(
                 (category, index) =>
                   category.meals.length > 0 && (
-                    <div key={index} className="category">
-                      <h2>{category.name}</h2>
-
-                      <div className="dishesof1Cat">
-                        {category.meals.map((meal) => (
-                          <section
-                            className="dish"
-                            key={meal.id}
-                            onClick={() => {
-                              market.map((dish) =>
-                                setTotalprice(totalprice + dish.prix)
-                              );
-                              UploadDish(meal);
-                            }}
-                          >
-                            {console.log({ market })}
-
-                            <div>
-                              <h4>{meal.title}</h4>
-                              <p className="dish-description">
-                                {meal.description}
-                              </p>
-                              <p className="price">{meal.price} €</p>
-                              {meal.popular && (
-                                <span className="popular">⭐️popular</span>
-                              )}
-                            </div>
-                            {meal.picture && (
-                              <img src={meal.picture} alt={meal.title} />
-                            )}
-                          </section>
-                        ))}
-                      </div>
-                    </div>
+                    <Category
+                      key={index}
+                      category={category}
+                      handleClick={UploadDish}
+                    />
                   )
               )}
             </div>
           </section>
-
-          <div className="market">
-            {market.map((dish, index) => {
-              //chaque plat avec sa quantité et son prix
-              return (
-                <div key={index}>
-                  {dish.quantité}
-                  {dish.name} {dish.prix}
-                </div>
-              );
-            })}
-
-            <p>{totalprice}</p>
-          </div>
+          <Market market={market} eraseOrAdd={eraseOrAdd} subTotal={subTotal} deliveryFees={deliveryFees} />
         </div>
       </main>
     </div>

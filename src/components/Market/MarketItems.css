@@ -1,0 +1,40 @@
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2E3333;
+}
+
+.market-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.item-quantity {
+  margin: 0 5px;
+  font-weight: 500;
+}
+
+.item-name {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.item-price-total {
+  font-weight: 500;
+}
+
+.item-controls svg {
+  color: #02cdbd;     
+  cursor: pointer;      
+  font-size: 20px;      
+  transition: color 0.2s; 
+}

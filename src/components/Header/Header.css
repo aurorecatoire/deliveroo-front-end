@@ -9,3 +9,10 @@ header {
   padding: 20px 0;
   border-bottom: 1px solid #6a6e6e;
 }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
